@@ -29,10 +29,9 @@ def sendAndReceiveChatScript(msgToSend, server='127.0.0.1', port=1024, timeout=1
 
 
 if __name__ == '__main__':
-    server = "127.0.0.1"            # 本地服务器
-
-    # server = "10.28.108.32"        # 连接MOA服务器，不成功。暂时不考虑
-    #server = '118.178.192.184'
+    server = "127.0.0.1"         # 本地服务器
+    # server = "10.28.108.32"    # 如果是远程Windows服务器，填写您服务器的外网IP地址。
+    #另外客户端ip必须在授权ip清单内，清单为all则允许所有ip访问。
     port = 1024
     botname = "Harry"
     user = "yalei"
@@ -77,11 +76,11 @@ if __name__ == '__main__':
             mid = ' '.join(seg_list)   # 中间形态，分词后用空格隔开。
             mid = s
 
-        print(mid)
+        print('分词后：',mid)
         # Send this to the server and print the response
         # Put in null terminations as required
         msg = '%s\u0000%s\u0000%s\u0000' % (user, botname, mid)
-        msg = str.encode(msg,encoding='gbk')
+        msg = str.encode(msg,encoding='gbk')                   #对消息重新编码。
 
         resp = sendAndReceiveChatScript(msg, server=server, port=port)
         if resp is None:
