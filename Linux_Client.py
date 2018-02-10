@@ -28,7 +28,8 @@ def sendAndReceiveChatScript(msgToSend, server='127.0.0.1', port=1024, timeout=1
 
 
 if __name__ == '__main__':
-    server = '118.178.192.184'  # 服务器的外网IP地址。另外客户端ip在授权ip清单内，清单为all则允许所有ip访问。
+    server = '10.10.10.10'  # 改为您服务器的外网IP地址。另外客户端ip必须在授权ip清单内，清单为all则允许所有ip访问。
+    # 如果是本机，则使用127.0.0.1即可。
     port = 1024                 # 默认端口为1024
     botname = "Harry"           # 默认Bot为Harry
     user = "yalei"              # 用户名可以自己指定
