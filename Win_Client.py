@@ -2,11 +2,10 @@
 # Not very efficient, since it uses a thread per socket model,
 # If servicing a large number of clients, twisted may be a better fit
 
-from optparse import OptionParser
 import jieba
 import socket
-import sys
-jieba.load_userdict("E:/ChatScript_8win/privatecode/Jieba/DICT/user.dict.utf8")
+
+# jieba.load_userdict("E:/ChatScript_8win/privatecode/Jieba/DICT/user.dict.utf8")  #使用自定义词典时需要预加载
 
 
 def sendAndReceiveChatScript(msgToSend, server='127.0.0.1', port=1024, timeout=10):
@@ -30,34 +29,13 @@ def sendAndReceiveChatScript(msgToSend, server='127.0.0.1', port=1024, timeout=1
 
 if __name__ == '__main__':
     server = "127.0.0.1"         # 本地服务器
-    # server = "10.28.108.32"    # 如果是远程Windows服务器，填写您服务器的外网IP地址。
+    # server = "10.10.10.32"    # 如果是远程Windows服务器，填写您服务器的外网IP地址。
     #另外客户端ip必须在授权ip清单内，清单为all则允许所有ip访问。
     port = 1024
     botname = "Harry"
     user = "yalei"
 
-    # Setup the command line arguments.
-    optp = OptionParser()
-
-    # user name to login to chat script as
-    optp.add_option("-u", dest="user", help="user id, required")
-    # botname
-    optp.add_option("-b", dest="botname", help="which bot to talk to, if not specified, will use default bot")
-    # server
-    optp.add_option("-s", dest="server", help="chat server host name (default is " + str(server) + ")")
-    # port
-    optp.add_option("-p", dest="port", help="chat server listen port (default is " + str(port) + ")")
-
-    opts, args = optp.parse_args()
-
-    # if opts.user is None:
-    #     optp.print_help()
-    #     sys.exit(1)
-    # user = opts.user
-    botname = opts.botname if opts.botname is not None else botname
-    server = opts.server if opts.server is not None else server
-    port = int(opts.port) if opts.port is not None else port
-
+    
     print("Hi " + user + ", enter ':quit' to end this session")
 
     while True:
@@ -74,13 +52,12 @@ if __name__ == '__main__':
         else:               # 常规情况，做了分词然后发出去。
             seg_list = jieba.cut(s)
             mid = ' '.join(seg_list)   # 中间形态，分词后用空格隔开。
-            mid = s
-
-        print('分词后：',mid)
+            print('分词后：',mid)
+            
         # Send this to the server and print the response
         # Put in null terminations as required
         msg = '%s\u0000%s\u0000%s\u0000' % (user, botname, mid)
-        msg = str.encode(msg,encoding='gbk')                   #对消息重新编码。
+        msg = str.encode(msg,encoding='gbk')    #对消息使用GBK重新编码。否则，Windows版ChatScript无法正确响应
 
         resp = sendAndReceiveChatScript(msg, server=server, port=port)
         if resp is None:
