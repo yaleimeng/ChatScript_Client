@@ -5,8 +5,8 @@
 - Linux服务器则比较简单，直接使用utf-8即可。如果是远程服务器，填入外网IP地址即可。
 
 客户端图片：</br>
-![客户端图片](https://github.com/yaleimeng/ChatScript_Client/blob/master/client.png)
+![客户端图片](https://github.com/yaleimeng/ChatScript_Client/blob/master/Pics/client.png)
 Windows服务器端图片：</br>
-![Windows服务器端](https://github.com/yaleimeng/ChatScript_Client/blob/master/server.png)
+![Windows服务器端](https://github.com/yaleimeng/ChatScript_Client/blob/master/Pics/server.png)
 Linux服务器端图片：</br>
-![Linux服务器端](https://github.com/yaleimeng/ChatScript_Client/blob/master/server_linux.png)
+![Linux服务器端](https://github.com/yaleimeng/ChatScript_Client/blob/master/Pics/server_linux.png)
